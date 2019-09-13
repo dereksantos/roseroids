@@ -364,7 +364,7 @@ function checkShipAsteroidCollisions() {
             s.idle = true;
 
             generateShipExplosion();
-            destroyAsteroid(a);
+            destroyAsteroid(a, false);
         }
     }
 }
@@ -409,13 +409,15 @@ function checkDistanceCollision(obj1, obj2) {
     return false;
 }
 
-function destroyAsteroid(asteroid) {
+function destroyAsteroid(asteroid, playSound = true) {
     asteroid.blacklisted = true;
 
     generateAsteroidExplosion(asteroid);
     resolveAsteroidType(asteroid);
 
-    playOuchSound();
+    if (playSound) {
+        playOuchSound();
+    }
 }
 
 function generateAsteroidExplosion(asteroid) {
